@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associação Gentes da Banda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Navigation */
+        nav {
+            background: #34495e;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: #2c3e50;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .timeline-item {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .form-tab {
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .form-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        .form-content {
+            display: none;
+        }
+
+        .form-content.active {
+            display: block;
+        }
+
+        .submit-btn {
+            background: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.success {
+            background: #27ae60;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="hero">
+                <h1>Associação Gentes da Banda</h1>
+                <p>Solidariedade, apoio mútuo e bem-estar da nossa comunidade</p>
+                <a href="#formularios" class="cta-button">Torne-se Membro</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#beneficios">Benefícios</a></li>
+                <li><a href="#formularios">Inscrever-se</a></li>
+                <li><a href="#contribuicoes">Contribuições</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section id="sobre" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre a Associação</h2>
+            <div class="about-content">
+                <div>
+                    <p>A Associação Gentes da Banda é uma organização comunitária sem fins lucrativos, localizada no bairro Caminhos de Ferro de Moçambique (C.F.M), distrito de Mocuba, província da Zambézia.</p>
+                    <br>
+                    <p>Nossa missão é promover o auxílio mútuo entre os membros em casos de aflição, doença grave ou morte, visando a solidariedade e o bem-estar da comunidade.</p>
+                    <br>
+                    <p>Somos uma pessoa jurídica de direito privado, com reconhecimento formal por parte de todas as autoridades locais do país, dedicada exclusivamente a situações de morte ou doença grave comprovada de membros ou familiares diretos.</p>
+                </div>
+                <div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon">🏥</div>
+                            <h4>Hoje</h4>
+                            <p>Apoio em casos de morte e doença grave</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">🛒</div>
+                            <h4>Futuro Próximo</h4>
+                            <p>Cestas básicas e assistência em dificuldades</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon">📚</div>
+                            <h4>Expansão</h4>
+                            <p>Programas educacionais e eventos de integração</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="beneficios">
+        <div class="container">
+            <h2 class="section-title">Benefícios para Membros</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏥</div>
+                    <h3>Assistência em Saúde</h3>
+                    <p>Apoio financeiro em casos de doença grave comprovada do membro ou familiares diretos (pais, esposa e filhos).</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🕊</div>
+                    <h3>Apoio em Luto</h3>
+                    <p>Assistência financeira e emocional em casos de falecimento de membros ou familiares diretos.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛒</div>
+                    <h3>Cestas Básicas</h3>
+                    <p>Fornecimento futuro de cestas básicas em situações de necessidade alimentar.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📚</div>
+                    <h3>Programas Educacionais</h3>
+                    <p>Cursos, workshops e treinamentos para desenvolvimento pessoal e profissional.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Eventos de Integração</h3>
+                    <p>Atividades que fortalecem os laços entre membros e promovem cooperação mútua.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌍</div>
+                    <h3>Cobertura Nacional</h3>
+                    <p>Independentemente da localização, membros ativos têm direito aos benefícios.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forms Section -->
+    <section id="formularios" class="about">
+        <div class="container">
+            <h2 class="section-title">Área de Membros</h2>
+            
+            <div class="form-container">
+                <div class="form-tabs">
+                    <button class="form-tab active" onclick="switchTab('inscricao')">Inscrição</button>
+                    <button class="form-tab" onclick="switchTab('contato')">Contato</button>
+                    <button class="form-tab" onclick="switchTab('beneficio')">Solicitar Benefício</button>
+                    <button class="form-tab" onclick="switchTab('newsletter')">Newsletter</button>
+                </div>
+
+                <!-- Formulário de Inscrição -->
+                <div id="inscricao" class="form-content active">
+                    <h3>Formulário de Inscrição</h3>
+                    <form id="inscricaoForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo *</label>
+                                <input type="text" id="nome" name="nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bi">Número do BI *</label>
+                                <input type="text" id="bi" name="bi" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nascimento">Data de Nascimento *</label>
+                                <input type="date" id="nascimento" name="nascimento" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone *</label>
+                                <input type="tel" id="telefone" name="telefone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="endereco">Endereço Completo *</label>
+                            <textarea id="endereco" name="endereco" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="profissao">Profissão</label>
+                                <input type="text" id="profissao" name="profissao">
+                            </div>
+                            <div class="form-group">
+                                <label for="pagamento">Forma de Pagamento *</label>
+                                <select id="pagamento" name="pagamento" required>
+                                    <option value="">Selecione</option>
+                                    <option value="anual">À vista (anual)</option>
+                                    <option value="trimestral">Trimestral</option>
+                                    <option value="mensal">Mensal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="familiares">Familiares Diretos (Nome e Parentesco)</label>
+                            <textarea id="familiares" name="familiares" rows="4" placeholder="Ex: Maria Silva - Esposa&#10;João Silva - Filho&#10;Ana Silva - Filha"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Enviar Solicitação de Inscrição</button>
+                    </form>
+                </div>
+
+                <!-- Formulário de Contato -->
+                <div id="contato" class="form-content">
+                    <h3>Entre em Contato Conosco</h3>
+                    <form id="contatoForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome-contato">Nome *</label>
+                                <input type="text" id="nome-contato" name="nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email-contato">Email *</label>
+                                <input type="email" id="email-contato" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="assunto">Assunto *</label>
+                            <select id="assunto" name="assunto" required>
+                                <option value="">Selecione o assunto</option>
+                                <option value="duvida">Dúvida sobre a associação</option>
+                                <option value="beneficio">Informações sobre benefícios</option>
+                                <option value="contribuicao">Dúvidas sobre contribuições</option>
+                                <option value="reclamacao">Reclamação</option>
+                                <option value="sugestao">Sugestão</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem *</label>
+                            <textarea id="mensagem" name="mensagem" rows="6" required placeholder="Descreva sua dúvida, sugestão ou reclamação..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Enviar Mensagem</button>
+                    </form>
+                </div>
+
+                <!-- Formulário de Benefício -->
+                <div id="beneficio" class="form-content">
+                    <h3>Solicitação de Benefício</h3>
+                    <form id="beneficioForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome-membro">Nome do Membro *</label>
+                                <input type="text" id="nome-membro" name="nomeMembro" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="numero-membro">Número de Membro *</label>
+                                <input type="text" id="numero-membro" name="numeroMembro" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipo-beneficio">Tipo de Benefício *</label>
+                            <select id="tipo-beneficio" name="tipoBeneficio" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="doenca">Doença Grave</option>
+                                <option value="morte">Falecimento</option>
+                                <option value="cesta">Cesta Básica</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
